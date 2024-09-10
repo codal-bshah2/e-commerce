@@ -13,17 +13,16 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setToken(localStorage.getItem("token") ?? "");
+      setIsAuthenticated(true);
     } else {
       setToken("");
     }
   }, [isAuthenticated]);
   const checkLoginAuthentication = () => {
     setIsAuthenticated(true);
-    console.log("check login authentication");
   };
   const checkLogoutAuthentication = () => {
     setIsAuthenticated(false);
-    console.log("check logout authentication");
   };
   return (
     <AuthContext.Provider value={{ token: token, setToken: setToken }}>
@@ -38,7 +37,6 @@ function App() {
                 path="/login"
                 element={<LoginPage handleFxn={checkLoginAuthentication} />}
               />
-              
 
               <Route path="/" element={<LandingPage />} />
               <Route path="/:id" element={<ProductDetails />} />
